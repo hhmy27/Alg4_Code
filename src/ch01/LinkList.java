@@ -11,7 +11,7 @@ import java.util.Iterator;
  *  \* Description: 带有首尾指针的单向链表，其中N是链表的长度，并且链表没有额外的头结点 
  *  \
  */
-public class Linklist<Item> implements Iterable<Item> {
+public class LinkList<Item> implements Iterable<Item> {
     private Node first;
     private Node last;
     private int N;
@@ -85,12 +85,12 @@ public class Linklist<Item> implements Iterable<Item> {
         }
     }
 
-    Linklist() {
+    LinkList() {
         first = null;
         last = null;
     }
 
-    Linklist(Item[] items) {
+    LinkList(Item[] items) {
         // 构造头结点
         first = new Node(items[0]);
         // 用于构造链表
@@ -128,7 +128,7 @@ public class Linklist<Item> implements Iterable<Item> {
         addN();
     }
 
-    public void preappend(Item item) {
+    public void preAppend(Item item) {
         // 在首部插入结点
         Node t = new Node(item);
         t.next = first;
@@ -156,8 +156,9 @@ public class Linklist<Item> implements Iterable<Item> {
 
     public Item delete(int k) {
         // 删除第k个结点
-        if (k <= 0)
+        if (k <= 0) {
             throw new Error("k必须大于0");
+        }
         if (k == 1) {
             Item item = first.item;
             // 删除头结点，特殊操作
@@ -178,6 +179,31 @@ public class Linklist<Item> implements Iterable<Item> {
         tf.next = tf.next.next;
         reduceN();
         return item;
+    }
+
+    // 在第k个结点前插入
+    public void insert(Item item, int k) {
+        if (k <= 0) {
+            throw new Error("k必须大于0");
+        }
+        if (k == 1) {
+            preAppend(item);
+        } else {
+            k -= 1;   // 删除第k个结点，需要找到第k-1个结点
+            Node tf = first;
+            // 由于没有空的头结点，所以终止条件是k大于1，例如传入k=2,那么while时k=1，则first就是要插入结点的前一个结点
+            while (tf != null && k > 1) {
+                k--;
+                tf = tf.next;
+            }
+            if (tf == null) {
+                throw new Error("超过链表长度");
+            }
+            Node t = new Node(item);
+            t.next = tf.next;
+            tf.next = t;
+            addN();
+        }
     }
 
     public boolean find(Item key) {
@@ -230,7 +256,7 @@ public class Linklist<Item> implements Iterable<Item> {
         //删除完之后，更新first和last两个指针
         first = H.next;
         last = first;
-        while (last!=null && last.next != null)
+        while (last != null && last.next != null)
             last = last.next;
         reduceN(num);
     }
@@ -278,7 +304,7 @@ public class Linklist<Item> implements Iterable<Item> {
         return N;
     }
 
-    Linklist(Node node) {
+    LinkList(Node node) {
         int num = 0;
         first = node;
         Node t = node;
@@ -292,8 +318,8 @@ public class Linklist<Item> implements Iterable<Item> {
 
     public static void main(String[] args) {
         Integer[] list = {1, 2, 3, 4};
-        Linklist<Integer> L = new Linklist<>(list);
-        Linklist<Integer> tL = new Linklist<>(L.reverse_recursion(L.first));
+        LinkList<Integer> L = new LinkList<>(list);
+        LinkList<Integer> tL = new LinkList<>(L.reverse_recursion(L.first));
         tL.visitList();
     }
 }

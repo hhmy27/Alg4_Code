@@ -12,7 +12,7 @@ package ch01;
 public class ex_1_3_19 {
     public static void main(String[] args) {
         Integer[] nums={1,2,3,4,5};
-        Linklist<Integer> L=new Linklist<>(nums);
+        LinkList<Integer> L=new LinkList<>(nums);
         L.reverse_iteration();
         L.visitList();
         int size=L.size();

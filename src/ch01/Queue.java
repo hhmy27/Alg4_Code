@@ -25,6 +25,22 @@ public class Queue<Item> implements Iterable<Item>{
             next = null;
         }
     }
+    public Queue(){
+
+    }
+    // ex 1.3.41的答案，从q中构造一个Queue
+    public Queue(Queue<Item> q){
+        Queue<Item> r=new Queue<>();
+        while (!q.isEmpty()) {
+           r.enqueue(q.dequeue());
+        }
+        N=r.size();
+        for (int i = 0; i < N; i++) {
+            Item item=r.dequeue();
+            q.enqueue(item);
+            r.enqueue(item);
+        }
+    }
 
     public void enqueue(Item item) {
         Node n = new Node(item);
