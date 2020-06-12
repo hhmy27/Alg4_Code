@@ -1,7 +1,5 @@
 package ch01;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @program: AlgorithmBook
@@ -11,8 +9,6 @@ import java.util.Map;
  */
 public class MoveToFront {
     LinkList<Character> link = new LinkList<>();
-    // 存储字符
-    Map<Character, Integer> map = new HashMap<>();
 
     public void operate(String s) {
         for (int i = 0; i < s.length(); i++) {

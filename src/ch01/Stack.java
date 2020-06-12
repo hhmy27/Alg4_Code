@@ -10,12 +10,34 @@ import java.util.Iterator;
  *  \* Date: 2020/4/28
  *  \* Time: 8:36
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: 
+ *  \* Description: 链栈的插入方式是在首结点插入，移动first 
  *  \
  */
 public class Stack<Item> implements Iterable<Item> {
     private Node first;
     private int N;
+
+    public Stack() {
+        first = null;
+        N = 0;
+    }
+
+    // 1.3.42的答案
+    public Stack(Stack<Item> s) {
+        N = s.size();
+        first = null;
+        Stack<Item> t = new Stack<>();
+        for (Item item : s) {
+            t.push(item);
+        }
+
+        for (Item item : t) {
+            Node node = new Node(item);
+            node.next = first;
+            first = node;
+        }
+
+    }
 
     @Override
     public Iterator<Item> iterator() {
@@ -27,6 +49,7 @@ public class Stack<Item> implements Iterable<Item> {
 
         @Override
         public boolean hasNext() {
+//            return cur.next!=null;
             return !(cur == null);
         }
 
@@ -36,7 +59,6 @@ public class Stack<Item> implements Iterable<Item> {
             cur = cur.next;
             return item;
         }
-
 
         @Override
         public void remove() {
@@ -80,15 +102,15 @@ public class Stack<Item> implements Iterable<Item> {
         return first.item;
     }
 
-
+    // 1.3.12的答案
     public static <Item> Stack<Item> copy(Stack<Item> s) {
         Stack<Item> result = new Stack<>();
         Stack<Item> temp = new Stack<>();
         Iterator<Item> it = s.iterator();
         while (it.hasNext())
             temp.push(it.next());
-        it=temp.iterator();
-        while(it.hasNext())
+        it = temp.iterator();
+        while (it.hasNext())
             result.push(it.next());
         return result;
     }
@@ -98,20 +120,11 @@ public class Stack<Item> implements Iterable<Item> {
         stack.push("are");
         stack.push("you");
         stack.push("ok?");
-        Stack<String>temp=Stack.copy(stack);
-        for(String s:temp)
+        Stack<String> temp = Stack.copy(stack);
+        for (String s : temp)
             System.out.println(s);
-//        Stack<String> stack = new Stack<>();
-//        String [] sa={"it","was","-","the","best","-","of","times","-", "-","-","it", "was", "-", "the", "-", "-" };
-//        for(String s : sa){
-//            if(s.equals("-"))
-//                stack.pop();
-//            else
-//                stack.push(s);
-//        }
-//        for(String s: stack){
-//            System.out.println(s);
-//        }
-
+        System.out.println("---");
+        Stack<String> t=new Stack<>(stack);
+        t.forEach(System.out::println);
     }
 }

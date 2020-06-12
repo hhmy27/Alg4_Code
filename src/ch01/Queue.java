@@ -11,7 +11,7 @@ import java.util.Iterator;
  *  \* Description: 
  *  \
  */
-public class Queue<Item> implements Iterable<Item>{
+public class Queue<Item> implements Iterable<Item> {
     private Node front;
     private Node last;
     private int N;
@@ -25,27 +25,28 @@ public class Queue<Item> implements Iterable<Item>{
             next = null;
         }
     }
-    public Queue(){
+
+    public Queue() {
 
     }
+
     // ex 1.3.41的答案，从q中构造一个Queue
-    public Queue(Queue<Item> q){
-        Queue<Item> r=new Queue<>();
-        while (!q.isEmpty()) {
-           r.enqueue(q.dequeue());
+    public Queue(Queue<Item> q) {
+        N = q.size();
+        front = new Node(null);
+        last = front;
+        for (Item item : q) {
+            Node t = new Node(item);
+            last.next = t;
+            last = t;
         }
-        N=r.size();
-        for (int i = 0; i < N; i++) {
-            Item item=r.dequeue();
-            q.enqueue(item);
-            r.enqueue(item);
-        }
+        front = front.next;
     }
 
     public void enqueue(Item item) {
         Node n = new Node(item);
-        if(isEmpty())
-            front=n; //如果是队列，设置front为新结点
+        if (isEmpty())
+            front = n; //如果是队列，设置front为新结点
         else
             last.next = n;  //如果不是空队列，直接设置last的next指针为新结点
         last = n;   //更新last
@@ -55,10 +56,22 @@ public class Queue<Item> implements Iterable<Item>{
     public Item dequeue() {
         Node first = front;
         front = front.next;
-        if(isEmpty())
-            last=null;  //出队后，如果是空队列，那么last变为null，front因为上一条语句也变为null
+        if (isEmpty())
+            last = null;  //出队后，如果是空队列，那么last变为null，front因为上一条语句也变为null
         N--;
         return first.item;
+    }
+
+    public Node getFront() {
+        return front;
+    }
+
+    public Node getLast() {
+        Node t = front;
+        while (t.next != null) {
+            t = t.next;
+        }
+        return t;
     }
 
     public int size() {
@@ -68,36 +81,51 @@ public class Queue<Item> implements Iterable<Item>{
     public boolean isEmpty() {
         return N == 0;
     }
-    public Iterator<Item> iterator(){
+
+    public Iterator<Item> iterator() {
         return new QueueIterator();
     }
-    private class QueueIterator implements Iterator<Item>{
-        private Node cur=front;
+
+    private class QueueIterator implements Iterator<Item> {
+        private Node cur = front;
+
         @Override
         public boolean hasNext() {
-            return !(cur==null);
+            return !(cur == null);
         }
 
         @Override
         public Item next() {
-            Item item=cur.item;
-            cur=cur.next;
+            Item item = cur.item;
+            cur = cur.next;
             return item;
         }
 
         @Override
-        public void remove() { }
-    }
-    public static void main(String[] args) {
-        Queue<Integer> que=new Queue<>();
-        for (int i = 0; i < 5; i++) {
-            que.enqueue(i+1);
+        public void remove() {
         }
+    }
+
+    public static void main(String[] args) {
+        Queue<Integer> que = new Queue<>();
+        for (int i = 0; i < 5; i++) {
+            que.enqueue(i + 1);
+        }
+        System.out.println("q:");
+        que.forEach(System.out::println);
 //        que.dequeue();
 //        System.out.println(que.dequeue());
 //        System.out.println(que.size());
-        for(int i : que){
-            System.out.println(i);
-        }
+        Queue<Integer> r = new Queue<>(que);
+        System.out.println("r:");
+        r.forEach(System.out::println);
+        r.enqueue(42);
+        r.enqueue(3);
+
+        System.out.println("r:");
+        r.forEach(System.out::println);
+
+        System.out.println("q:");
+        que.forEach(System.out::println);
     }
 }
