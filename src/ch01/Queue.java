@@ -62,11 +62,21 @@ public class Queue<Item> implements Iterable<Item> {
         return first.item;
     }
 
-    public Node getFront() {
+    public Item front() {
+        Item item = null;
+        try {
+            item = getFront().item;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return item;
+    }
+
+    private Node getFront() {
         return front;
     }
 
-    public Node getLast() {
+    private Node getLast() {
         Node t = front;
         while (t.next != null) {
             t = t.next;
@@ -106,26 +116,45 @@ public class Queue<Item> implements Iterable<Item> {
         }
     }
 
-    public static void main(String[] args) {
-        Queue<Integer> que = new Queue<>();
-        for (int i = 0; i < 5; i++) {
-            que.enqueue(i + 1);
+    // ex 1.3.47
+    // 将r里面的元素链接到队尾
+    public void catenation(Queue<Item> r) {
+        for (Item item : r) {
+            this.enqueue(item);
         }
-        System.out.println("q:");
-        que.forEach(System.out::println);
-//        que.dequeue();
-//        System.out.println(que.dequeue());
-//        System.out.println(que.size());
-        Queue<Integer> r = new Queue<>(que);
-        System.out.println("r:");
-        r.forEach(System.out::println);
-        r.enqueue(42);
-        r.enqueue(3);
+    }
 
-        System.out.println("r:");
-        r.forEach(System.out::println);
 
-        System.out.println("q:");
-        que.forEach(System.out::println);
+    public static void main(String[] args) {
+//        Queue<Integer> que = new Queue<>();
+//        for (int i = 0; i < 5; i++) {
+//            que.enqueue(i + 1);
+//        }
+//        System.out.println("q:");
+//        que.forEach(System.out::println);
+////        que.dequeue();
+////        System.out.println(que.dequeue());
+////        System.out.println(que.size());
+//        Queue<Integer> r = new Queue<>(que);
+//        System.out.println("r:");
+//        r.forEach(System.out::println);
+//        r.enqueue(42);
+//        r.enqueue(3);
+//
+//        System.out.println("r:");
+//        r.forEach(System.out::println);
+//
+//        System.out.println("q:");
+//        que.forEach(System.out::println);
+
+        // ex 1.3.47 test
+//        Queue<Integer> q=new Queue<>();
+//        Queue<Integer> r=new Queue<>();
+//        q.enqueue(1);
+//        q.enqueue(2);
+//        r.enqueue(-1);
+//        r.enqueue(-3);
+//        q.catenation(r);
+//        q.forEach(System.out::println);
     }
 }

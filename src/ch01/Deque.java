@@ -8,7 +8,7 @@ import java.util.Iterator;
  *  \* Date: 2020/5/12
  *  \* Time: 15:07
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: This is answer for 1.3.33
+ *  \* Description: This is answer for ex 1.3.33
  *  \  1       2      3      4       5
  * \  left                         right
  */
@@ -139,7 +139,7 @@ public class Deque<Item> implements Iterable<Item> {
         deque.pushLeft(2);
         deque.pushRight(3);
         deque.pushRight(4);
-        int size=deque.size();
+        int size = deque.size();
         for (int i = 0; i < size; i++) {
             deque.popRight();
         }

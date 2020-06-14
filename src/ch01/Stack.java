@@ -2,6 +2,7 @@ package ch01;
 
 import edu.princeton.cs.algs4.In;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 /**
@@ -16,13 +17,16 @@ import java.util.Iterator;
 public class Stack<Item> implements Iterable<Item> {
     private Node first;
     private int N;
+    private int op;
 
     public Stack() {
         first = null;
         N = 0;
+        op = 0;
     }
 
     // 1.3.42的答案
+    // 从一个栈中构造另一个栈
     public Stack(Stack<Item> s) {
         N = s.size();
         first = null;
@@ -36,7 +40,6 @@ public class Stack<Item> implements Iterable<Item> {
             node.next = first;
             first = node;
         }
-
     }
 
     @Override
@@ -46,10 +49,12 @@ public class Stack<Item> implements Iterable<Item> {
 
     private class StakeIterator implements Iterator<Item> {
         private Node cur = first;
+        private int top = op;
 
         @Override
         public boolean hasNext() {
-//            return cur.next!=null;
+            if(top!=op)
+                throw new ConcurrentModificationException("栈被修改了");
             return !(cur == null);
         }
 
@@ -81,12 +86,14 @@ public class Stack<Item> implements Iterable<Item> {
         n.next = first;
         first = n;
         N++;
+        op++;
     }
 
     public Item pop() {
         Node top = first;
         first = first.next;
         N--;
+        op--;
         return top.item;
     }
 
@@ -99,7 +106,21 @@ public class Stack<Item> implements Iterable<Item> {
     }
 
     public Item peek() {
+        if (first == null)
+            return null;
         return first.item;
+    }
+
+    // ex 1.3.47
+    // 在当前栈上面放置q栈中的元素
+    public void catenation(Stack<Item> q) {
+        Stack<Item> t = new Stack<>();
+        for (Item item : q) {
+            t.push(item);
+        }
+        while (!t.isEmpty()) {
+            this.push(t.pop());
+        }
     }
 
     // 1.3.12的答案
@@ -116,15 +137,30 @@ public class Stack<Item> implements Iterable<Item> {
     }
 
     public static void main(String[] args) {
-        Stack<String> stack = new Stack<>();
-        stack.push("are");
-        stack.push("you");
-        stack.push("ok?");
-        Stack<String> temp = Stack.copy(stack);
-        for (String s : temp)
-            System.out.println(s);
-        System.out.println("---");
-        Stack<String> t=new Stack<>(stack);
-        t.forEach(System.out::println);
+//        Stack<String> stack = new Stack<>();
+//        stack.push("are");
+//        stack.push("you");
+//        stack.push("ok?");
+//        Stack<String> temp = Stack.copy(stack);
+//        for (String s : temp)
+//            System.out.println(s);
+//        System.out.println("---");
+//        Stack<String> t = new Stack<>(stack);
+//        t.forEach(System.out::println);
+        // ex 1.3.47
+        Stack<Integer> s = new Stack<>();
+        s.push(3);
+        s.push(2);
+        Stack<Integer> d = new Stack<>();
+        d.push(5);
+        d.push(-7);
+        s.catenation(d);
+        s.forEach(System.out::println);
+        for (Integer integer : s) {
+            if(integer<3)
+                s.pop();
+            else
+                System.out.println(integer);
+        }
     }
 }
