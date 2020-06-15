@@ -44,11 +44,44 @@ public class test {
 //            System.out.print(ts);
 //        }
 //        System.out.println(ex_1_3_09_b(slist));
-        String []T={" "};
-        DoublingRatio.main(T);
-   }
+//        String[] T = {" "};
+//        DoublingRatio.main(T);
+        int N=10000000;
+        fa(N);
+        fb(N);
+        fc(N);
 
+    }
 
+    public static void fa(int N) {
+        int sum = 0;
+        for (int n = N; n > 0; n /= 2) {
+            for (int i = 0; i < n; i++) {
+                sum++;
+            }
+        }
+        System.out.println(sum);
+    }
+
+    public static void fb(int N) {
+        int sum = 0;
+        for (int i = 1; i < N; i *= 2) {
+            for (int j = 0; j < i; j++) {
+                sum++;
+            }
+        }
+        System.out.println(sum);
+    }
+
+    public static void fc(int N) {
+        int sum = 0;
+        for (int i = 1; i < N; i *= 2) {
+            for (int j = 0; j < N; j++) {
+                sum++;
+            }
+        }
+        System.out.println(sum);
+    }
 
     public static boolean helper(ch01.Stack<Character> stack, char a, char b) {
         // 开始匹配，如果匹配过程中栈为空，那么就返回false，否则匹配到了，返回true
