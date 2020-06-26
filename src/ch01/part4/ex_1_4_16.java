@@ -1,5 +1,7 @@
 package ch01.part4;
 
+import java.util.Arrays;
+
 import static java.lang.Math.abs;
 import static java.util.Arrays.sort;
 
@@ -12,12 +14,13 @@ import static java.util.Arrays.sort;
 public class ex_1_4_16 {
 
     // O(NlogN)
-    public static double func(double[] a) {
+    public static double[] func(double[] a) {
         if (a.length == 0) {
             throw new Error("数组为空");
         }
 
         sort(a);
+        double[] ans = new double[2];
         // min应该是最接近0的数，而不是最小的数
         double min = a[0];
         for (int i = 0; i < a.length - 1; i++) {
@@ -25,13 +28,15 @@ public class ex_1_4_16 {
             if (abs(a[i] - a[i + 1]) * abs(a[i] - a[i + 1]) < min * min) {
                 System.out.println(a[i] + " " + a[i + 1]);
                 min = abs(a[i] - a[i + 1]);
+                ans[0] = a[i];
+                ans[1] = a[i + 1];
             }
         }
-        return min;
+        return ans;
     }
 
     public static void main(String[] args) {
         double[] a = {1.1, 2.3, -1.2, -3.1, 2.7, 1.8, 0.4, 0.9, -0.3, -1.8, -2};
-        System.out.println(func(a));
+        System.out.println(Arrays.toString(func(a)));
     }
 }
