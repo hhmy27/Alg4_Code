@@ -48,6 +48,10 @@ public class ex_1_4_18 {
         return -1;
     }
 
+    /*
+    * 二分法解决数组中peak finding 问题，要求数组必须是distinct的
+    * 如果当前元素不是peak，那么就往较小的相邻元素走，若干次二分后始终会碰到一个满足条件的peak元素
+    * */
     public static int func3(int[] a) {
         if (a.length == 0)
             return -1;
