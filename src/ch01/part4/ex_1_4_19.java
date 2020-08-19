@@ -82,7 +82,38 @@ public class ex_1_4_19 {
         }
     }
 
-//  寻找局部最大
+    public int findPeakElement(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return -1;
+        if (nums.length == 1) {
+            return 0;
+        }
+        if (nums.length == 2) {
+            return nums[0] > nums[1] ? 0 : 1;
+        }
+        int lo = 0, hi = nums.length - 1;
+        int mi = lo + (hi - lo) / 2;
+        // 碰到边界情况了
+        while (mi != 0 && mi != nums.length - 1) {
+            if (nums[mi] > nums[mi + 1] && nums[mi] > nums[mi - 1]) {
+                return mi;
+            } else {
+                if (nums[mi + 1] > nums[mi - 1])
+                    lo = mi + 1;
+                else
+                    hi = mi - 1;
+            }
+            mi = lo + (hi - lo) / 2;
+        }
+        // 边界情况特殊判断
+        if (mi == 0) {
+            return nums[mi] > nums[mi + 1] ? mi : mi + 1;
+        } else {
+            return nums[mi] > nums[mi - 1] ? mi : mi - 1;
+        }
+    }
+
+    //  寻找局部最大
     public static int func3(int a[][]) {
         int N = a.length;
         int y = N / 2;
