@@ -1,6 +1,5 @@
 package ch01;
 
-import sun.applet.AppletViewer;
 
 /**
  * @program: AlgorithmBook
@@ -91,7 +90,7 @@ public class GeneralizedArrayQueue<Item> {
         System.out.println(queue.delete(2));
         System.out.println(queue.delete(1));
         for (int i = 0; i < 3; i++) {
-            queue.insert(i+3);
+            queue.insert(i + 3);
         }
         System.out.println(queue.delete(2));
     }
