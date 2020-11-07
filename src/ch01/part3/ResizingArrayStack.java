@@ -1,4 +1,4 @@
-package ch01;
+package ch01.part3;
 
 /**
  *  \* Created with IntelliJ IDEA.
@@ -6,7 +6,7 @@ package ch01;
  *  \* Date: 2020/4/27
  *  \* Time: 17:39
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: 
+ *  \* Description:  Part 1.3 , algorithm 1.1
  *  \
  */
 

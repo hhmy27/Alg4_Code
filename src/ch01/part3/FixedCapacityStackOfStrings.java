@@ -1,11 +1,11 @@
-package ch01;
+package ch01.part3;
 
 /**
  *  \* Created with IntelliJ IDEA.
  *  \* User: hmy
  *  \* Date: 2020/4/27
  *  \* Time: 16:51
- *  \* Description: 
+ *  \* Description: ex1.3.1 add isFull()
  *  \
  */
 public class FixedCapacityStackOfStrings {
@@ -25,9 +25,9 @@ public class FixedCapacityStackOfStrings {
 
     public String pop() {
         if (index == 0)
-            throw new Error("栈空");
+            throw new Error("empty stack can not pop");
         String item = stack[--index];
-        stack[index] = null;  //避免对象游离
+        stack[index] = null;  // manual set null
         if (index > 0 && index == stack.length / 2) resize(stack.length / 2);
         return item;
     }
@@ -48,6 +48,7 @@ public class FixedCapacityStackOfStrings {
         stack = temp;
     }
 
+    // ex1.3.1
     public boolean isFull() {
         return index == stack.length;
     }

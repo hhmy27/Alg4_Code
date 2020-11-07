@@ -1,5 +1,7 @@
 package ch01;
 
+import ch01.part3.Queue;
+
 /**
  *  \* Created with IntelliJ IDEA.
  *  \* User: hmy

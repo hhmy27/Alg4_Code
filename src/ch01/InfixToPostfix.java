@@ -1,7 +1,6 @@
 package ch01;
 
-import edu.princeton.cs.algs4.StdIn;
-import ch01.Stack;
+import ch01.part3.Stack;
 import edu.princeton.cs.algs4.StdOut;
 
 /**

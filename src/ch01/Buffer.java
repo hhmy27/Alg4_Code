@@ -1,5 +1,7 @@
 package ch01;
 
+import ch01.part3.Stack;
+
 /**
  * @program: AlgorithmBook
  * @author: hhmy27

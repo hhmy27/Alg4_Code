@@ -1,4 +1,4 @@
-package ch01;
+package ch01.part3;
 
 import java.util.Iterator;
 
@@ -8,7 +8,8 @@ import java.util.Iterator;
  *  \* Date: 2020/4/28
  *  \* Time: 8:52
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: 
+ *  \* Description: Single list with front last pointer implement Queue
+ *                   
  *  \
  */
 public class Queue<Item> implements Iterable<Item> {

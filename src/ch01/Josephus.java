@@ -1,5 +1,7 @@
 package ch01;
 
+import ch01.part3.Queue;
+
 /**
  * @program: AlgorithmBook
  * @description: ex 1.3.37

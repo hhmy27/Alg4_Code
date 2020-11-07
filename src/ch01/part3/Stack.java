@@ -1,6 +1,4 @@
-package ch01;
-
-import edu.princeton.cs.algs4.In;
+package ch01.part3;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -11,7 +9,7 @@ import java.util.Iterator;
  *  \* Date: 2020/4/28
  *  \* Time: 8:36
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: 链栈的插入方式是在首结点插入，移动first 
+ *  \* Description: Single list implement Stack
  *  \
  */
 public class Stack<Item> implements Iterable<Item> {
@@ -53,7 +51,7 @@ public class Stack<Item> implements Iterable<Item> {
 
         @Override
         public boolean hasNext() {
-            if(top!=op)
+            if (top != op)
                 throw new ConcurrentModificationException("栈被修改了");
             return !(cur == null);
         }
@@ -107,7 +105,7 @@ public class Stack<Item> implements Iterable<Item> {
 
     public Item peek() {
         if (first == null)
-            return null;
+            throw new IndexOutOfBoundsException("stack is empty");
         return first.item;
     }
 
@@ -157,7 +155,7 @@ public class Stack<Item> implements Iterable<Item> {
         s.catenation(d);
         s.forEach(System.out::println);
         for (Integer integer : s) {
-            if(integer<3)
+            if (integer < 3)
                 s.pop();
             else
                 System.out.println(integer);

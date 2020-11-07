@@ -1,9 +1,6 @@
-package ch01;
-
-import edu.princeton.cs.algs4.In;
+package ch01.part3;
 
 import java.util.Iterator;
-import java.util.ListIterator;
 
 /**
  *  \* Created with IntelliJ IDEA.
@@ -11,12 +8,14 @@ import java.util.ListIterator;
  *  \* Date: 2020/4/28
  *  \* Time: 9:29
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: 
+ *  \* Description: Single list implement Bag
+ * <p>
  *  \
  */
 public class Bag<Item> implements Iterable<Item> {
     private Node first;
     private int N;
+
     private class Node {
         Item item;
         Node next;
@@ -34,12 +33,14 @@ public class Bag<Item> implements Iterable<Item> {
         return new ListIterator();
     }
 
-    public int size(){
+    public int size() {
         return N;
     }
-    public boolean isEmpty(){
-        return N==0;
+
+    public boolean isEmpty() {
+        return N == 0;
     }
+
     private class ListIterator implements Iterator<Item> {
         private Node current = first;
 
@@ -58,12 +59,12 @@ public class Bag<Item> implements Iterable<Item> {
     }
 
     public static void main(String[] args) {
-        Bag<Integer> bag=new Bag<>();
+        Bag<Integer> bag = new Bag<>();
         for (int i = 0; i < 5; i++) {
-            bag.add(i+1);
+            bag.add(i + 1);
         }
-        System.out.println("size"+bag.size());
-        for (int i : bag){
+        System.out.println("size" + bag.size());
+        for (int i : bag) {
             System.out.println(i);
         }
 

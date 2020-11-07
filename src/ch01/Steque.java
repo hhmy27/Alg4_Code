@@ -1,6 +1,6 @@
 package ch01;
 
-import edu.princeton.cs.algs4.In;
+import ch01.part3.Stack;
 
 import java.util.Iterator;
 
