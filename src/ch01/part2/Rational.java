@@ -13,6 +13,10 @@ public class Rational {
     private long denominator;
 
     public Rational(long numerator, long denominator) {
+        // ex 1.2.17
+        assert numerator >= Long.MIN_VALUE && numerator <= Long.MAX_VALUE;
+        assert denominator >= Long.MIN_VALUE && denominator <= Long.MAX_VALUE;
+
         this.numerator = numerator;
         this.denominator = denominator;
         check();
