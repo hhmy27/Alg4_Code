@@ -1,9 +1,6 @@
 package ch01;
 
-import edu.princeton.cs.algs4.DoublingRatio;
-import edu.princeton.cs.algs4.DoublingTest;
-
-import java.util.Arrays;
+import ch01.part3.Stack;
 
 /**
  *  \* Created with IntelliJ IDEA.
@@ -83,7 +80,7 @@ public class test {
         System.out.println(sum);
     }
 
-    public static boolean helper(ch01.Stack<Character> stack, char a, char b) {
+    public static boolean helper(Stack<Character> stack, char a, char b) {
         // 开始匹配，如果匹配过程中栈为空，那么就返回false，否则匹配到了，返回true
         char t;
         do {
@@ -95,7 +92,7 @@ public class test {
     }
 
     public static boolean Parentheses(String sa) {
-        ch01.Stack<Character> stack = new Stack<>();
+        Stack<Character> stack = new Stack<>();
         for (int i = 0; i < sa.length(); i++) {
             char ch = sa.charAt(i);
             switch (ch) {
