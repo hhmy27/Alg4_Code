@@ -1,4 +1,4 @@
-package ch01;
+package ch01.part3;
 
 import ch01.part3.Stack;
 import edu.princeton.cs.algs4.StdOut;
