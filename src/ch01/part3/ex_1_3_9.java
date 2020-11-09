@@ -20,7 +20,7 @@ public class ex_1_3_9 {
 
     /*
      * thread: we see all element in expression is a entity*/
-    public String func1(String input) {
+    public String func(String input) {
         Stack<Character> stack = new Stack<>();
         Queue<Character> queue = new Queue<>();
 
@@ -49,7 +49,6 @@ public class ex_1_3_9 {
                     queue.enqueue(value);
                 }
                 queue.enqueue(')');
-                // queue中存放了 ( A + B )的String，现在弹出并压入stack中 => ( A + B )
                 // queue store string like "(A+B)", now we need pop it and push to stack
                 while (!queue.isEmpty()) {
                     stack.push(queue.dequeue());
@@ -57,12 +56,12 @@ public class ex_1_3_9 {
             }
         }
 
-        // 先将stack压入到tstack中，然后再把tstack中的String放入到ans中
+        // we pop stack to tstack,and push to ans from tstack
         StringBuilder sb = new StringBuilder();
         Stack<Character> tstack = new Stack<>();
         while (!stack.isEmpty())
             tstack.push(stack.pop());
-        int index = 0;
+
         while (!tstack.isEmpty())
             sb.append(tstack.pop());
         return sb.toString();
@@ -71,7 +70,7 @@ public class ex_1_3_9 {
     // this is func1 helper function
     // it can pop a entity for a stack
     public String popEntity(Stack<Character> stack) {
-        // the entity maybe is 1, ( 1 + 2 ), ( 3 + ( 1 + 2 ) ), so we need return String[] data
+        // the entity maybe is 1, (1+2), (3+(1+2))
         // every String is denote a entity
 
         // ops use to store entity that need to pop
@@ -90,40 +89,26 @@ public class ex_1_3_9 {
                 ops.push(top);
             } while (r != 0);
         } else {
-            ops.push(stack.pop());
+            ops.push(stack.pop());   // maybe stack top is operation sign, we just pop it
         }
+
         StringBuilder sb = new StringBuilder();
         while (!ops.isEmpty())
             sb.append(ops.pop());
         return sb.toString();
     }
 
-    // reference: https://github.com/reneargento/algorithms-sedgewick-wayne/blob/master/src/chapter1/section3/Exercise9.java
-    public String func2(String[] args) {
-        Stack<String> ops = new Stack<>();
-        Stack<String> vals = new Stack<>();
-        for (String s : args) {
-            // 如果是数字，直接push vals
-            // 如果是字符并且不是右括号，则push ops
-            // 如果是右括号，开始补全，弹出操作数，操作符，然后再弹出操作数，补全左括号，再压回栈中 （假设没有sqrt操作
-            if (s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/"))
-                ops.push(s);
-            else if (s.equals(")")) {
-                String a = vals.pop();
-                String b = vals.pop();
-                String op = ops.pop();
-                String t = String.format("( %s %s %s )", b, op, a);
-                vals.push(t);
-            } else
-                vals.push(s);
-        }
-        return vals.pop();
-    }
-
     @Test
     public void test1() {
         String s = "1+2)*3-4)*5-6)))";
-        System.out.println(func1(s));
+        System.out.println(func(s));
+        assert func(s).equals("((1+2)*((3-4)*(5-6)))");
+    }
+
+    @Test
+    public void test2() {
+        String s = "1+2)";
+        assert func(s).equals("(1+2)");
     }
 
 
