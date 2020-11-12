@@ -23,8 +23,8 @@ public class Stack<Item> implements Iterable<Item> {
         op = 0;
     }
 
-    // 1.3.42的答案
-    // 从一个栈中构造另一个栈
+    // answer for ex 1.3.42
+    // create a Stack from another stack
     public Stack(Stack<Item> s) {
         N = s.size();
         first = null;
@@ -121,7 +121,7 @@ public class Stack<Item> implements Iterable<Item> {
         }
     }
 
-    // 1.3.12的答案
+    // answer for ex1.3.12
     public static <Item> Stack<Item> copy(Stack<Item> s) {
         Stack<Item> result = new Stack<>();
         Stack<Item> temp = new Stack<>();
