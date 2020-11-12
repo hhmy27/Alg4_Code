@@ -8,8 +8,7 @@ import java.util.Iterator;
  *  \* Date: 2020/4/28
  *  \* Time: 8:52
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: Single list with front last pointer implement Queue
- *                   
+ *  \* Description: answer for ex1.3.29, Queue implemented by linklist which has front and last pointer
  *  \
  */
 public class Queue<Item> implements Iterable<Item> {
@@ -31,7 +30,7 @@ public class Queue<Item> implements Iterable<Item> {
 
     }
 
-    // ex 1.3.41的答案，从q中构造一个Queue
+//     answer for ex 1.3.41
     public Queue(Queue<Item> q) {
         N = q.size();
         front = new Node(null);
