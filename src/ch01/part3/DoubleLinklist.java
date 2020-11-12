@@ -1,4 +1,4 @@
-package ch01;
+package ch01.part3;
 
 import java.util.Iterator;
 
@@ -8,7 +8,7 @@ import java.util.Iterator;
  *  \* Date: 2020/5/8
  *  \* Time: 20:28
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: 
+ *  \* Description: answer for ex1.3.31
  *  \
  */
 
