@@ -1,6 +1,7 @@
-package ch01;
+package ch01.part3;
 
 import ch01.part3.Stack;
+import org.junit.Test;
 
 /**
  *  \* Created with IntelliJ IDEA.
@@ -8,15 +9,13 @@ import ch01.part3.Stack;
  *  \* Date: 2020/4/30
  *  \* Time: 10:34
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: 
+ *  \* Description: answer for ex 1.3.11
  *  \
  */
 public class EvaluatePostfix {
-    public static void main(String[] args) {
+    public Double func(String input) {
         Stack<Double> vals = new Stack<>();
-        Stack<String> ops = new Stack<>();
-        String str = "2 3 * 2 1 - / 3 4 1 - * +";
-        String[] slist = str.split(" ");
+        String[] slist = input.split(" ");
         for (String s : slist) {
             Double a;
             Double b;
@@ -50,6 +49,12 @@ public class EvaluatePostfix {
                     vals.push(Double.parseDouble(s));
             }
         }
-        System.out.println(vals.pop());
+        return vals.pop();
+    }
+
+    @Test
+    public void test() {
+        String input = "2 3 * 2 1 - / 3 4 1 - * +";
+        assert func(input) == 15.0;
     }
 }
