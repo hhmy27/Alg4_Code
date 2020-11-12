@@ -35,16 +35,13 @@ public class ex_1_3_3 {
     // more simplify method is we manually simulate pop operate and compare to sequential
     // its time complexity is O(n)
     public boolean func2(String sequence) {
-        Queue<Integer> queue = new Queue<>();
-        for (int i = 0; i < sequence.length(); i++) {
-            queue.enqueue(sequence.charAt(i) - '0');
-        }
+        int ind = 0;
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i <= 9; i++) {
             stack.push(i);
-            while (!stack.isEmpty() && stack.peek().equals(queue.front())) {
+            while (!stack.isEmpty() && stack.peek().equals(sequence.charAt(ind) - '0')) {
                 stack.pop();
-                queue.dequeue();
+                ind++;
             }
         }
         return stack.isEmpty();
