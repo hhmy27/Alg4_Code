@@ -67,7 +67,7 @@ public class ex_1_3_9 {
         return sb.toString();
     }
 
-    // this is func1 helper function
+    // this is func helper function
     // it can pop a entity for a stack
     public String popEntity(Stack<Character> stack) {
         // the entity maybe is 1, (1+2), (3+(1+2))

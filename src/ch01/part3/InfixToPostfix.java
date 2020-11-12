@@ -1,25 +1,24 @@
 package ch01.part3;
 
-import ch01.part3.Stack;
-import edu.princeton.cs.algs4.StdOut;
+import org.junit.Test;
 
 /**
  *  \* Created with IntelliJ IDEA.
  *  \* User: hmy
  *  \* Date: 2020/4/30
  *  \* Time: 10:04
- *  \* Description: ex 1.3.10的实现，中序表达式转后序，输入表达式要求：每一个操作周围都有括号包围
+ *  \* Description: answer for ex 1.3.10
  * \* 思路是用两个栈，碰到)的时候弹出，然后按照 表达式1 表达式2 操作符 的顺序再入栈 ，最后栈顶就是完整的后缀表达式
+ * \* Thread: use two stack, one of stack store operate character, another one store number character
+ * when we meet ')', we pop character like format val1 val2 op and push again
+ * when we finish iterator, the vals stack is full expression
  *  \
  */
 public class InfixToPostfix {
-
-    public static void main(String[] args) {
+    public String func(String input) {
         Stack<String> ops = new Stack<String>();
         Stack<String> vals = new Stack<String>();
-        String str = "( ( ( 2 * 3 ) / ( 2 - 1 ) ) + ( 3 * ( 4 - 1 ) ) )";
-//        String str="( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )";
-        String[] slist = str.split(" ");
+        String[] slist = input.split(" ");
         for (String s : slist) {
             switch (s) {
                 case "(":
@@ -52,33 +51,18 @@ public class InfixToPostfix {
             }
         }
 
-        StdOut.println(vals.pop());
+        return vals.pop();
     }
-    //    public static void main(String[] args) {
-//        //无sqrt操作符的实现版本
-//        Stack<String> stack = new Stack<String>();
-////        String str="( ( ( 1 + 2 ) * 3 ) - 4 )";
-//        String str="( ( ( 2 * 3 ) / ( 2 - 1 ) ) + ( 3 * ( 4 - 1 ) ) )";
-////        String str="( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )";
-//        String[] slist=str.split(" ");
-//        for(String s : slist){
-//            switch (s) {
-//                case "+":
-//                case "-":
-//                case "*":
-//                case "/":
-//                    stack.push(s);
-//                    break;
-//                case "(":
-//                    break;
-//                case ")":
-//                    System.out.print(stack.pop() + " ");
-//                    break;
-//                default:
-//                    System.out.print(s + " ");
-//            }
-//        }
-//        System.out.println();
-//    }
 
+    @Test
+    public void test1() {
+        String input = "( ( ( 2 * 3 ) / ( 2 - 1 ) ) + ( 3 * ( 4 - 1 ) ) )";
+        assert func(input).equals("2 3 * 2 1 - / 3 4 1 - * +");
+    }
+
+    @Test
+    public void test2() {
+        String input = "( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )";
+        assert func(input).equals("1 2 3 + 4 5 * * +");
+    }
 }
