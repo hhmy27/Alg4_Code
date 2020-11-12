@@ -1,4 +1,4 @@
-package ch01;
+package ch01.part3;
 
 import ch01.part3.Queue;
 
@@ -8,7 +8,7 @@ import ch01.part3.Queue;
  *  \* Date: 2020/5/1
  *  \* Time: 8:29
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: 
+ *  \* Description:  answer for ex1.3.15
  *  \
  */
 public class ex_1_3_15 {

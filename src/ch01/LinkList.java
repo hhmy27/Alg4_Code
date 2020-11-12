@@ -8,12 +8,23 @@ import java.util.Iterator;
  *  \* Date: 2020/5/1
  *  \* Time: 8:39
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: 带有首尾指针的单向链表，其中N是链表的长度，并且链表没有额外的头结点 
+ *  \* Description: A linklist which has front and last pointer, and hasn't head node 
+ * LinkList contains answers follwing:
+ * 1.3.19
+ * 1.3.20
+ * 1.3.21
+ * 1.3.24
+ * 1.3.25
+ * 1.3.26
+ * 1.3.27
+ * 1.3.28
+ * 1.3.30
  *  \
  */
 public class LinkList<Item> implements Iterable<Item> {
     private Node first;
     private Node last;
+    // N is list node number
     private int N;
 
     public void visitList() {
@@ -91,14 +102,10 @@ public class LinkList<Item> implements Iterable<Item> {
     }
 
     LinkList(Item[] items) {
-        // 构造头结点
         first = new Node(items[0]);
-        // 用于构造链表
         Node t = first;
         for (int i = 1; i < items.length; i++) {
-            // 新建结点
             Node n = new Node(items[i]);
-            // 建立链接并更新
             t.next = n;
             t = n;
         }
@@ -114,10 +121,11 @@ public class LinkList<Item> implements Iterable<Item> {
         return first == null;
     }
 
+    // add new node in last of linklist
     public void append(Item item) {
-        //在末尾更新结点
+
         Node t = new Node(item);
-        //如果链表一开始是空的,此时last也是空的
+        // if linklist is null list
         if (first == null) {
             first = last = t;
         } else {
@@ -128,16 +136,17 @@ public class LinkList<Item> implements Iterable<Item> {
         addN();
     }
 
+    // add new node before front of linklist
     public void preAppend(Item item) {
-        // 在首部插入结点
         Node t = new Node(item);
         t.next = first;
         first = t;
         addN();
     }
 
+    // answer for ex1.3.19
+    // remove last node
     public void removeLast() {
-        // 移除尾结点
         Node t = getFirst();
         while (t.next.next != null)
             t = t.next;
@@ -146,34 +155,37 @@ public class LinkList<Item> implements Iterable<Item> {
         reduceN();
     }
 
+    // remove fist node
     public void removeFirst() {
-        // 移除首结点
         if (isEmpty())
             throw new Error("链表为空");
         first = first.next;
         reduceN();
     }
 
+    // answer for ex1.3.20
+    // delete k-th node in linklist
     public Item delete(int k) {
-        // 删除第k个结点
         if (k <= 0) {
-            throw new Error("k必须大于0");
+            throw new Error("k must bigger than 0");
         }
+        // remove head node
         if (k == 1) {
             Item item = first.item;
-            // 删除头结点，特殊操作
             removeFirst();
             return item;
         }
-        k -= 1;   // 删除第k个结点，需要找到第k-1个结点
+        // find k-1 th node
+        k -= 1;
         Node tf = first;
-        // 由于没有空的头结点，所以终止条件是k大于1，例如传入k=2,那么while时k=1，则first就是要删除结点的前一个结点
+        // tf is k-1 th node
         while (tf != null && k > 1) {
             k--;
             tf = tf.next;
         }
+
         if (tf == null) {
-            throw new Error("超过链表长度");
+            throw new Error("k bigger that the length of linklist");
         }
         Item item = tf.next.item;
         tf.next = tf.next.next;
@@ -206,6 +218,7 @@ public class LinkList<Item> implements Iterable<Item> {
         }
     }
 
+    // answer for ex1.3.21
     public boolean find(Item key) {
         for (Item item : this)
             if (item == key)
@@ -213,6 +226,7 @@ public class LinkList<Item> implements Iterable<Item> {
         return false;
     }
 
+    // answer for ex1.3.24
     public void removeAfter(Item item) {
         Node t = first;
         while (t != null && t.item != item)
@@ -225,6 +239,7 @@ public class LinkList<Item> implements Iterable<Item> {
 
     }
 
+    // answer for ex1.3.25
     public void insertAfter(Item a, Item b) {
         if (a == null && b == null)
             return;
@@ -239,9 +254,11 @@ public class LinkList<Item> implements Iterable<Item> {
         addN();
     }
 
+    // answer for ex1.3.26
+    // delete all node which item == key
     public void remove(Item key) {
-        // 删除所有item==key的node
         // 接上一个空的结点，从H开始遍历
+        // join a head node, iterate linklist from h
         Node H = new Node(null);
         H.next = first;
         Node t = H;
@@ -254,6 +271,7 @@ public class LinkList<Item> implements Iterable<Item> {
                 t = t.next;
         }
         //删除完之后，更新first和last两个指针
+        // update front and last pointer after iterate linklist
         first = H.next;
         last = first;
         while (last != null && last.next != null)
@@ -261,11 +279,25 @@ public class LinkList<Item> implements Iterable<Item> {
         reduceN(num);
     }
 
-    public Item max() {
+    // answer for ex1.3.27
+    public int max_iterate() {
         Node t = first;
-        return max(t, (Item) new Integer(0));
+        int max = (int) t.item;
+        while (t != null && t != null) {
+            if ((int) t.item > max)
+                max = (int) t.item;
+            t = t.next;
+        }
+        return max;
     }
 
+    // answer for ex1.3.28
+    public Item max() {
+        Node t = first;
+        return max(t, first.item);
+    }
+
+    // answer for ex1.3.28
     private Item max(Node t, Item max_num) {
         if (t == null)
             return max_num;
@@ -275,6 +307,7 @@ public class LinkList<Item> implements Iterable<Item> {
         }
     }
 
+    // iterate way to reverse linklist
     public void reverse_iteration() {
         Node H = new Node(null);
         Node t = first;
@@ -285,10 +318,14 @@ public class LinkList<Item> implements Iterable<Item> {
             t = n;
         }
         // 逆置后，last变为原先的first,first变为H.next
+        // transform last and first pointer
         last = first;
         first = H.next;
+        H.next = null;
+        H = null;
     }
 
+    // answer for ex1.3.28
     public Node reverse_recursion(Node node) {
         // 递归终止条件,如果当前结点为空，或者当前结点是尾结点
         if (node == null || node.next == null)
@@ -319,7 +356,15 @@ public class LinkList<Item> implements Iterable<Item> {
     public static void main(String[] args) {
         Integer[] list = {1, 2, 3, 4};
         LinkList<Integer> L = new LinkList<>(list);
-        LinkList<Integer> tL = new LinkList<>(L.reverse_recursion(L.first));
-        tL.visitList();
+        System.out.println(L.max_iterate());
+        System.out.println(L.max());
+//        LinkList<Integer> tL = new LinkList<>(L.reverse_recursion(L.first));
+//        tL.visitList();
+//        L.delete(4);
+        L.visitList();
+        L.reverse_iteration();
+        L.visitList();
+        L.first = L.reverse_recursion(L.first);
+        L.visitList();
     }
 }
