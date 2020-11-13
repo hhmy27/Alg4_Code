@@ -5,8 +5,7 @@ package ch01.part3;
  * @author: hhmy27
  * @created: 2020/06/14 16:44
  * @description: ex 1.3.49
- * 用有限个栈实现一个队列，保证队列的每个操作都只需要常数次的栈操作，注意是常数次
- * 队列API： enqueue,dequeue,isEmpty,size,front(获取首元素)
+ * API: enqueue,dequeue,isEmpty,size,front
  */
 public class StackImplementQueue<Item> {
     private Stack<Item> A;
@@ -15,7 +14,6 @@ public class StackImplementQueue<Item> {
     public StackImplementQueue() {
         A = new Stack<>();
         B = new Stack<>();
-
     }
 
     public void enqueue(Item item) {
