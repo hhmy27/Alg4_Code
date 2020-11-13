@@ -8,6 +8,7 @@ package ch01.part3;
  */
 public class ex_1_3_45 {
     // 判断栈是否会向下溢出
+    // judge a operate sequence will overflow or not
     public boolean judgeOverflow(String s) {
         int sum = 0;
         for (int i = 0; i < s.length(); i++) {
@@ -23,13 +24,14 @@ public class ex_1_3_45 {
         return true;
     }
 
-    // 在线性时间内判断这些操作是否能生成给定序列
-    // s是输入序列，t是目标序列 target，判断由s是否能生成target
+    // judge s can generate t
     public boolean judgeGenerate(String s, String t) {
         if (s.length() != t.length()) return false;
         Stack<Character> stack = new Stack<>();
         int i = 0, j = 0;
         while (i < s.length() && j < t.length()) {
+            // when s[i] equal t[j] we can just skip it
+            // for operate, it mean once push and pop, we can see that nothing happen
             if (s.charAt(i) == t.charAt(j)) {
                 i += 1;
                 j += 1;
