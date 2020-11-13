@@ -1,11 +1,8 @@
-package ch01;
+package ch01.part3;
 
 import edu.princeton.cs.algs4.StdRandom;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
 
 /**
  *  \* Created with IntelliJ IDEA.
@@ -13,7 +10,7 @@ import java.util.Objects;
  *  \* Date: 2020/5/12
  *  \* Time: 15:37
  *  \* To change this template use File | Settings | File Templates.
- *  \* Description: 
+ *  \* Description:  answer for ex1.3.34
  *  \
  */
 public class RandomBag<Item> implements Iterable<Item> {

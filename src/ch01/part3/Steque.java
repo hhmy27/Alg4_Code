@@ -1,6 +1,4 @@
-package ch01;
-
-import ch01.part3.Stack;
+package ch01.part3;
 
 import java.util.Iterator;
 
@@ -11,8 +9,9 @@ import java.util.Iterator;
  *  \* Time: 14:20
  *  \* To change this template use File | Settings | File Templates.
  *  \* Description: This is answer for 1.3.32
- * \* front是栈顶，last是栈底，last还是入队的地方，push操作是从front一端进入,enqueue是从last一端，也就是从栈底的位置进入
- *  \* push、pop 都是对队列同一端的操作，enqueue 和 push 对应，但操作的是队列的另一端。——译者注
+ * contain answer 1.3.47
+ * front is stack top , last is stack bottom and enqueue operate space
+ * push operate add to front , enqueue operate add to last mean while is stack bottom
  */
 public class Steque<Item> implements Iterable<Item> {
     private Node front; // front 是右边的 栈顶
@@ -148,7 +147,6 @@ public class Steque<Item> implements Iterable<Item> {
     }
 
     // ex 1.3.47
-    // 将r中的元素连接到当前steque中
     public void catenation(Steque<Item> r) {
         Steque<Item> t = new Steque<>();
         for (Item item : r) {

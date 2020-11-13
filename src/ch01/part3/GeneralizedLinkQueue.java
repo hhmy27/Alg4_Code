@@ -1,8 +1,8 @@
-package ch01;
+package ch01.part3;
 
 /**
  * @program: AlgorithmBook
- * @description: ex 1.3.38的链表实现
+ * @description: ex 1.3.38 linklist implement
  * @author: HMY777
  * @created: 2020/05/14 08:24
  */

@@ -10,6 +10,11 @@ import java.util.Iterator;
  *  \* Time: 8:36
  *  \* To change this template use File | Settings | File Templates.
  *  \* Description: Single list implement Stack
+ * contains:
+ * ex 1.3.42
+ * ex 1.3.12
+ * ex 1.3.50
+ * ex 1.3.47
  *  \
  */
 public class Stack<Item> implements Iterable<Item> {
@@ -49,6 +54,7 @@ public class Stack<Item> implements Iterable<Item> {
         private Node cur = first;
         private int top = op;
 
+        // ex1.3.50
         @Override
         public boolean hasNext() {
             if (top != op)

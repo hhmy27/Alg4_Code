@@ -67,6 +67,5 @@ public class Bag<Item> implements Iterable<Item> {
         for (int i : bag) {
             System.out.println(i);
         }
-
     }
 }

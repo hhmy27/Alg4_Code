@@ -1,6 +1,4 @@
-package ch01;
-
-import ch01.part3.Queue;
+package ch01.part3;
 
 /**
  * @program: AlgorithmBook

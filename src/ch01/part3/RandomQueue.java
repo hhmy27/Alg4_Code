@@ -1,4 +1,4 @@
-package ch01;
+package ch01.part3;
 
 import edu.princeton.cs.algs4.StdRandom;
 
@@ -6,7 +6,7 @@ import java.util.Iterator;
 
 /**
  * @program: AlgorithmBook
- * @description: ex 1.3.35
+ * @description: ex 1.3.35, ex 1.3.36
  * @author: HMY777
  * @created: 2020/05/13 09:29
  */
@@ -50,6 +50,7 @@ public class RandomQueue<Item> implements Iterable<Item> {
 
 
 
+//  ex 1.3.36
     @Override
     public Iterator<Item> iterator() {
         return new RandomQueueIterator();

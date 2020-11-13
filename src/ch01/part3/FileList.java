@@ -1,4 +1,4 @@
-package ch01;
+package ch01.part3;
 
 import java.io.File;
 import java.util.Objects;

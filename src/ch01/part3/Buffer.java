@@ -1,12 +1,10 @@
-package ch01;
-
-import ch01.part3.Stack;
+package ch01.part3;
 
 /**
  * @program: AlgorithmBook
  * @author: hhmy27
  * @created: 2020/06/13 17:54
- * @description: ex 1.3.13 answer
+ * @description: ex 1.3.43 answer
  * insert
  * delete
  * left

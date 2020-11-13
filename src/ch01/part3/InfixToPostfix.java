@@ -8,7 +8,6 @@ import org.junit.Test;
  *  \* Date: 2020/4/30
  *  \* Time: 10:04
  *  \* Description: answer for ex 1.3.10
- * \* 思路是用两个栈，碰到)的时候弹出，然后按照 表达式1 表达式2 操作符 的顺序再入栈 ，最后栈顶就是完整的后缀表达式
  * \* Thread: use two stack, one of stack store operate character, another one store number character
  * when we meet ')', we pop character like format val1 val2 op and push again
  * when we finish iterator, the vals stack is full expression

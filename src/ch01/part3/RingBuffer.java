@@ -1,6 +1,4 @@
-package ch01;
-
-import edu.princeton.cs.algs4.In;
+package ch01.part3;
 
 /**
  * @program: AlgorithmBook
