@@ -55,13 +55,21 @@ Josephus.java
 LinkList.java
 
 - 1.3.19
+  
   1.3.20
+  
   1.3.21
+  
   1.3.24
+  
   1.3.25
+  
   1.3.26
+  
   1.3.27
+  
   1.3.28
+  
   1.3.30
 
 LinkQueue.java
@@ -107,8 +115,11 @@ RingBuffer.java
 Stack.java
 
 - 1.3.42
+  
   1.3.12
+  
   1.3.50
+  
   1.3.47
 
 StackImplementQueue.java
