@@ -10,8 +10,8 @@ import java.util.Set;
  * @description: answer for ex 1.4.12
  */
 public class ex_1_4_12 {
-    // a,b 有序数组
-    // 打印出a,b的公共元素，要求运行时间和N成正比
+    // a and b is sorted
+
     public static void print(int[] a, int[] b) {
         int i = 0, j = 0;
         while (i < a.length && j < b.length) {

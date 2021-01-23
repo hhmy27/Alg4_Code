@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class ex_1_4_8 {
     public static ArrayList<Integer> read() {
         ArrayList<Integer> list = new ArrayList<>();
-        File file = new File("G:\\JAVAcode\\AlgorithmBook\\src\\ch01\\part4\\ex_1_4_8_input");
+        File file = new File("src/ch01/part4/ex_1_4_8_input");
         try {
             InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
             BufferedReader bufferedReader = new BufferedReader(reader);
@@ -51,9 +51,10 @@ public class ex_1_4_8 {
         for (int i = 0; i < list.size(); i++) {
             int q = list.get(i);
             int j = i + 1;
+            // get all equal number
             while (j < list.size() && list.get(j) == q)
                 j += 1;
-            // 从k个数里面选出2个数，求所有的组合数
+            // k is equal number
             int k = j - i;
             if (k == 1)
                 continue;
