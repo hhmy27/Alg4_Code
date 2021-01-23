@@ -16,17 +16,15 @@ public class ex_1_4_16 {
     // O(NlogN)
     public static double[] func(double[] a) {
         if (a.length == 0) {
-            throw new Error("数组为空");
+            throw new Error("empty list");
         }
 
         sort(a);
         double[] ans = new double[2];
-        // min应该是最接近0的数，而不是最小的数
+        // min is most closer to 0, not most minimal, because exercise require most closer
         double min = a[0];
         for (int i = 0; i < a.length - 1; i++) {
-            // 使用平方公式算和0的距离
             if (abs(a[i] - a[i + 1]) * abs(a[i] - a[i + 1]) < min * min) {
-                System.out.println(a[i] + " " + a[i + 1]);
                 min = abs(a[i] - a[i + 1]);
                 ans[0] = a[i];
                 ans[1] = a[i + 1];

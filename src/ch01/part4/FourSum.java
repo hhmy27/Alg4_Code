@@ -4,7 +4,6 @@ import edu.princeton.cs.algs4.BinarySearch;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Stopwatch;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -15,7 +14,7 @@ import java.util.Arrays;
  */
 public class FourSum {
     // O(N^4)
-    public static void func(int[] a) {
+    public static void func1(int[] a) {
         int cnt = 0;
         for (int i = 0; i < a.length; i++) {
             for (int j = i + 1; j < a.length; j++) {
@@ -57,7 +56,7 @@ public class FourSum {
         int[] a = In.readInts("src/data/1Kints.txt");
         // O(N^4) 大约 78 second, O(N^3logN) 大约 7 second
         Stopwatch timer = new Stopwatch();
-        func(a);
+        func1(a);
         double time = timer.elapsedTime();
         System.out.println(time + " seconds");
         Stopwatch timer2 = new Stopwatch();

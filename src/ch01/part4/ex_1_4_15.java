@@ -25,7 +25,7 @@ public class ex_1_4_15 {
         return cnt;
     }
 
-    // O(NlogN)版本 也是书上的版本,不适用于数组中出现重复数的情况
+    // O(NlogN) two sum, effective only when a does NOT contain duplicates number
     public static int TwoSum_NlogN(int[] a) {
         int cnt = 0;
         for (int i = 0; i < a.length; i++) {
@@ -35,26 +35,8 @@ public class ex_1_4_15 {
         return cnt;
     }
 
-    // O(NlogN)版本 也是书上的版本,不适用于数组中出现重复数的情况
-    public static int TwoSum_NlogN_p(int[] a) {
-        int cnt = 0;
-        for (int i = 0; i < a.length; i++) {
-            int j = lower_bound(a, -a[i]);
-            if (j > i && a[j] + a[i] == 0) {
-                int r = 1;
-                while (a[++j] == -a[i])
-                    r++;
-                cnt += r;
-            }
-        }
-        int zn = (int) Arrays.stream(a).filter(v -> v == 0).count();
-        if (zn > 1)
-            cnt += cmn(zn, 2);
-        return cnt;
-    }
-
+    // check ex_1_4_10
     private static int lower_bound(int[] a, int key) {
-        //返回第一个大于等于key的位置
         int lo = 0, hi = a.length;
         int mid = 0;
         while (lo < hi) {
@@ -68,74 +50,19 @@ public class ex_1_4_15 {
         return lo;
     }
 
-    // O(N),使用hash表存储,对于0特殊处理
-    public static int TwoSumFaster(int[] a) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+    // O(NlogN), use lower_bound, see at ex_1_4_10
+    public static int TwoSum_NlogN_p(int[] a) {
         int cnt = 0;
-        // a中元素以及它出现的次数
-        for (Integer i : a) {
-            int count = 0;
-            if (map.containsKey(i))
-                count = map.get(i);
-            map.put(i, count + 1);
-        }
-
-        // 注意是遍历a而不是map
-        for (Integer v : a) {
-            if (v != 0)
-                // 如果存在-v使得两数之和为0
-                if (map.containsKey(-v))
-                    cnt += map.get(-v);
-
-        }
-        cnt /= 2;
-
-        // 特殊处理0
-        if (map.containsKey(0) && map.get(0) > 1)
-            cnt += cmn(map.get(0), 2);
-//        System.out.println(cnt);
-        return cnt;
-    }
-
-    // O(N),不需要额外的空间开销，特点是依据a已经排序的前提,和 two point 的思想
-    // 我们知道，如果能在一个有序数组中找到了两个数之和为零，那么它们一定是在该数组的两端（相对而言）
-    // 使用i从左到右，使用j从右到左，取得a[i],a[j]，根据a[i]+a[j]的结果来移动指针，特别要注意的是数组中有重复数和有0元素的情况
-    public static int TwoSumFaster_2(int[] a) {
-        int i = 0, j = a.length - 1;
-        int cnt = 0;
-        // 如果没有全为正或者全为负就退出
-        if (a[i] > 0 || a[j] < 0)
-            return 0;
-        // 在two sum里面，是求两个数之和，所以任何一个指针碰到0就退出了
-        while (i < j && a[i] != 0 && a[j] != 0) {
-            if (a[i] + a[j] > 0)
-                j -= 1;
-            else if (a[i] + a[j] < 0)
-                i += 1;
-            else {
-                // 此时a[i]+a[j]=0，做进一步处理
-                // 记录重复个数
-                int di = 1, dj = 1;
-                while (i + di < j && a[i + di] == a[i]) {
-                    di += 1;
-                }
-                while (j - dj > i && a[j - dj] == a[j]) {
-                    dj += 1;
-                }
-                // 如果没有重复数
-                if (di == 1 && dj == 1) {
-                    i++;
-                    j--;
-                    cnt++;
-                } else {
-                    // 组合数
-                    cnt += cmn(di, 1) * cmn(dj, 1);
-                    i += di;
-                    j -= dj;
-                }
+        for (int i = 0; i < a.length; i++) {
+            int j = lower_bound(a, -a[i]);
+            if (j > i && a[j] + a[i] == 0) {
+                int r = 1;
+                while (a[++j] == -a[i])
+                    r++;
+                cnt += r;
             }
         }
-        // 记录0的个数 特殊处理0和0的组合
+        // 0 + 0 = 0, O(n)
         int zn = (int) Arrays.stream(a).filter(v -> v == 0).count();
         if (zn > 1)
             cnt += cmn(zn, 2);
@@ -143,7 +70,83 @@ public class ex_1_4_15 {
     }
 
 
-    //要求输入n不能大于m，否则会返回-1，这是无意义的
+    // time complexity: O(N)
+    // use hash map
+    // space complexity: O(N)
+    public static int TwoSumFaster(int[] a) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int cnt = 0;
+        // counter a[i] and its times
+        for (Integer i : a) {
+            int count = 0;
+            if (map.containsKey(i))
+                count = map.get(i);
+            map.put(i, count + 1);
+        }
+
+        for (Integer v : a) {
+            if (v != 0)
+                // if find -v
+                if (map.containsKey(-v))
+                    cnt += map.get(-v);
+        }
+
+        // remove duplication
+        cnt /= 2;
+
+        // process 0 number
+        if (map.containsKey(0) && map.get(0) > 1)
+            cnt += cmn(map.get(0), 2);
+        return cnt;
+    }
+
+    // time complexity: O(N)
+    // space complexity: O(1)
+    // a is sorted, we use two point to iterate
+    public static int TwoSumFaster_p(int[] a) {
+        int i = 0, j = a.length - 1;
+        int cnt = 0;
+        // cant make up any pair
+        if (a[i] > 0 || a[j] < 0)
+            return 0;
+
+        // if a[i] or a[j] == 0, end loop.
+        while (i < j && a[i] != 0 && a[j] != 0) {
+            if (a[i] + a[j] > 0)
+                j -= 1;
+            else if (a[i] + a[j] < 0)
+                i += 1;
+            else {
+                // record duplicated number
+                int di = 1, dj = 1;
+                while (i + di < j && a[i + di] == a[i]) {
+                    di += 1;
+                }
+                while (j - dj > i && a[j - dj] == a[j]) {
+                    dj += 1;
+                }
+                // if not duplicated number
+                if (di == 1 && dj == 1) {
+                    i++;
+                    j--;
+                    cnt++;
+                } else {
+                    // calculate pair
+                    cnt += cmn(di, 1) * cmn(dj, 1);
+                    i += di;
+                    j -= dj;
+                }
+            }
+        }
+
+        // process zero
+        int zn = (int) Arrays.stream(a).filter(v -> v == 0).count();
+        if (zn > 1)
+            cnt += cmn(zn, 2);
+        return cnt;
+    }
+
+    // n <= m
     private static long cmn(int m, int n) {
         if (n == 0)
             return 1;
@@ -153,16 +156,15 @@ public class ex_1_4_15 {
             return cmn(m, m - n);
         if (n > 1)
             return cmn(m - 1, n - 1) + cmn(m - 1, n);
-        return -1; //通过编译用
+        return -1; // useless, through compile
     }
 
-    // 时间复杂度大于等于 O(N^2)
-    // 同样借助hash表,不同的是hash表里面存放的是这个元素的下标，目的是为了不重复计算组合
+    // use hash map
     public static int ThreeSumFaster(int[] a) {
+        // key: value
+        // value: index of value, a[index] = value
         HashMap<Integer, List<Integer>> map = new HashMap<>();
-        // 记录答案
         int cnt = 0;
-        // 记录下标
         for (int i = 0; i < a.length; i++) {
             if (!map.containsKey(a[i]))
                 map.put(a[i], new ArrayList<>());
@@ -178,15 +180,15 @@ public class ex_1_4_15 {
                 }
             }
         }
-//        System.out.println(cnt);
+
         return cnt;
     }
 
-    // 同样按照two point 的思想，由于是求三数之和，我们外面再套一个for
-    public static int ThreeSumFaster_2(int[] a) {
+    // use two point also
+    public static int ThreeSumFaster_p(int[] a) {
         int start = 0, end = a.length - 1;
         int cnt = 0;
-        // 如果没有全为正或者全为负就退出
+        // cant make up any pair
         if (a[start] > 0 || a[end] < 0)
             return 0;
 
@@ -202,15 +204,13 @@ public class ex_1_4_15 {
                 else if (t < 0)
                     start += 1;
                 else {
-                    // 此时a[i]+a[j]=0，做进一步处理
 
-                    // 跳过为0的情况，0的组合单独计算
                     if (a[start] == 0 && a[end] == 0) {
                         start++;
                         end--;
                         continue;
                     }
-                    // 记录重复个数
+
                     int di = 1, dj = 1;
 
                     while (start + di < end && a[start + di] == a[start]) {
@@ -221,13 +221,11 @@ public class ex_1_4_15 {
                         dj += 1;
                     }
 
-                    // 如果没有重复数
                     if (di == 1 && dj == 1) {
                         start++;
                         end--;
                         cnt++;
                     } else {
-                        // 组合数
                         cnt += cmn(di, 1) * cmn(dj, 1);
                         start += di;
                         end -= dj;
@@ -235,7 +233,7 @@ public class ex_1_4_15 {
                 }
             }
         }
-        // 记录0的个数 特殊处理0和0的组合
+
         int zn = (int) Arrays.stream(a).filter(value -> value == 0).count();
         if (zn > 2)
             cnt += cmn(zn, 3);
@@ -252,32 +250,32 @@ public class ex_1_4_15 {
 
         System.out.println("three sum 12, a");
         System.out.println(ThreeSumFaster(a));
-        System.out.println(ThreeSumFaster_2(a));
+        System.out.println(ThreeSumFaster_p(a));
 
         System.out.println("three sum 528, b");
         System.out.println(ThreeSumFaster(b));
-        System.out.println(ThreeSumFaster_2(b));
+        System.out.println(ThreeSumFaster_p(b));
 
         System.out.println("three sum 4039, c");
         System.out.println(ThreeSumFaster(c));
-        System.out.println(ThreeSumFaster_2(c));
+        System.out.println(ThreeSumFaster_p(c));
 
         System.out.println("two sum 6, a");
         System.out.println(TwoSum_ini(a));
         System.out.println(TwoSum_NlogN_p(a));
         System.out.println(TwoSumFaster(a));
-        System.out.println(TwoSumFaster_2(a));
+        System.out.println(TwoSumFaster_p(a));
 
         System.out.println("two sum 2, b");
         System.out.println(TwoSum_ini(b));
         System.out.println(TwoSum_NlogN_p(b));
         System.out.println(TwoSumFaster(b));
-        System.out.println(TwoSumFaster_2(b));
+        System.out.println(TwoSumFaster_p(b));
 
         System.out.println("two sum 3, c");
         System.out.println(TwoSum_ini(c));
         System.out.println(TwoSum_NlogN_p(c));
         System.out.println(TwoSumFaster(c));
-        System.out.println(TwoSumFaster_2(c));
+        System.out.println(TwoSumFaster_p(c));
     }
 }
