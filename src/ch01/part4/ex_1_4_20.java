@@ -21,13 +21,13 @@ public class ex_1_4_20 {
                     if (A[M] > x) {
                         return func(A, x, L, M - 1) || func(A, x, M + 1, R);
                     } else {
-                        return func(A, x, L, M-1);
+                        return func(A, x, L, M - 1);
                     }
                 } else {
                     if (A[M] > x) {
                         return func(A, x, L, M - 1) || func(A, x, M + 1, R);
                     } else {
-                        return func(A, x, M+1, R);
+                        return func(A, x, M + 1, R);
                     }
                 }
             }
@@ -39,8 +39,8 @@ public class ex_1_4_20 {
         int[] A = {1, 2, 4, 7, 8, 6, 3};
         int[] B = {2, 5, 6, 3, 1};
         int[] C = {3, 7, 8, 11, 1};
-        System.out.println(func(A, 3, 0, A.length));
-        System.out.println(func(B, 5, 0, B.length));
-        System.out.println(func(C, 9, 0, C.length));
+        System.out.println(func(A, 3, 0, A.length - 1));
+        System.out.println(func(B, 5, 0, B.length - 1));
+        System.out.println(func(C, 9, 0, C.length - 1));
     }
 }

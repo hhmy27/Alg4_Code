@@ -8,13 +8,13 @@ package ch01.part4;
  */
 public class ex_1_4_19 {
 
-    //  暴力法
+    // brute force
     public static int func1(int a[][]) {
-//      变化的维度
+        // direction
         int dx[] = {0, -1, 0, 1};
         int dy[] = {-1, 0, 1, 0};
 
-        // 依次遍历矩阵中的元素，找到第一个局部最小的元素
+        // iterate matrix to find a local minimal number
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a[i].length; j++) {
                 boolean flag = true;
@@ -32,14 +32,14 @@ public class ex_1_4_19 {
                 if (flag) return a[i][j];
             }
         }
-//      上面的遍历始终会返回一个数，这里的return是为了通过编译
+        // just for pass compile, never execute it
         return -1;
     }
 
     public static int func2(int a[][]) {
         if (a == null || a.length == 0 || (a.length == 1 && a[0].length == 0))
             throw new Error("矩阵不能为空");
-        // 矩阵长度
+
         int N = a.length;
         int lo = 0, hi = N * N - 1;
 
@@ -47,14 +47,14 @@ public class ex_1_4_19 {
         int dy[] = {-1, 0, 1, 0};
 
         while (true) {
-            // 二分的mid元素
             int mi = lo + (hi - lo) / 2;
-            // mid元素对应矩阵中的下标
+            // list[mid] corresponding matrix[x][y]
             int x = mi / N, y = mi % N;
             int min = a[x][y];
-            // 如果当前a[x][y]不满足条件，则从更小的元素开始二分
             int nx = x, ny = y;
             boolean flag = true;
+
+            // judge it meet or not
             for (int k = 0; k < 4; k++) {
                 int tx = x + dx[k];
                 int ty = y + dy[k];
@@ -63,18 +63,19 @@ public class ex_1_4_19 {
                 }
                 if (a[tx][ty] < a[x][y]) {
                     flag = false;
-//                    不需要break，因为要找到周围元素里面最小的
-//                    break;
                 }
-                // 标记周围元素中最小的
+                // record minimal number in list[mid] around
                 if (a[tx][ty] < min) {
                     min = a[ty][ty];
                     nx = tx;
                     ny = ty;
                 }
             }
+            // if list[mid] is local minimal number
             if (flag) return a[x][y];
+            // search in smaller side
             int min_ind = nx * N + ny;
+
             if (min_ind > mi)
                 lo = min_ind;
             else
@@ -113,23 +114,22 @@ public class ex_1_4_19 {
         }
     }
 
-    //  寻找局部最大
     public static int func3(int a[][]) {
         int N = a.length;
         int y = N / 2;
         while (true) {
-            int max = 0;
+            int min = a[0][y];
             int x = 0;
             // 寻找该列最大元素
             for (int i = 0; i < a.length; i++) {
-                if (a[i][y] > max) {
+                if (a[i][y] < min) {
                     x = i;
-                    max = a[i][y];
+                    min = a[i][y];
                 }
             }
-            if (y > 0 && a[x][y] < a[x][y - 1])
+            if (y > 0 && a[x][y] > a[x][y - 1])
                 y = y - 1;
-            else if (y < a.length - 1 && a[x][y] < a[x][y + 1])
+            else if (y < a.length - 1 && a[x][y] > a[x][y + 1])
                 y = y + 1;
             else
                 return a[x][y];
