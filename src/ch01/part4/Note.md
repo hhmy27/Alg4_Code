@@ -234,9 +234,121 @@ we can iterate list and record minimal and maximal number
 
 ## 1.4.18
 
+find `a[i]` which `a[i-1]>a[i]<a[i+1]`, note that edge number is an answer also.
 
+> eq: 
+> `1 3 5`,  `1` is answer, because `1<3`
+>
+> `5 3 1` , `1` is answer, because `3>1`
+
+the local minimal number may not be only.
+
+- func1
+
+  brute force method
+
+  time complexity: $O(n)$
+
+- func2
+
+  only effective when list is **distinct**
+
+  we use binary search method to find a local minimal number
+
+  when we get `a[mid]`, check it meet require or not. if it meet, return `mid`; if not, we search in smaller number side
+
+  > eq: [3,4,5,3,4]
+  >
+  > 5 not meet
+  >
+  > search in [3,4]
+
+  repeat the above operation, we always can find a local minimal number
+
+  time complexity: $O(logn)$
+
+  
+
+  more detail see at: ...
 
 ## 1.4.19
 
+now we need find local minimal number in matrix.
+
+- func1
+
+  it is very easy to write code of brute force method
+
+  time complexity: $O(n^2)$
+
+- func2
+
+  we can see a matrix to a list which space is `N*M`
+
+  we use binary search in list, and check `a[mid]` meet require or not. if it meet, return `mid`; if not, we search in smaller number side.
+
+  time complexity: $O(nlogn)$
+
+- func3
+
+  divide and conquer
+
+  time complexity: $O(nlogn)$
+
 ## 1.4.20
+
+it is a slightly complicate binary search problem, since list now contain **ascend** and **descend** part 
+
+we still get `mid = (lo + hi)/2` and judge it. if it is the key , return `mid`
+
+else:
+
+we need judge **`a[mid]`, `key`** and **`a[mid-1]`, `a[mid]`,`a[mid+1]`** size relationship
+
+we can judge `a[mid]` in what part.
+
+if `a[mid] > a[mid+1]`, `a[mid]` in **descend** part
+
+if `a[mid] < a[mid+1]`, `a[mid]` in **ascend** part
+
+
+
+if `a[mid] > key`, means `a[mid]` is too large, we need search in **smaller** area
+
+if `a[mid] < key`, means we need search `key` in a **bigger** area.
+
+now problem is how to define **bigger** and **smaller** area
+
+if `a[mid] > a[mid+1]`, not doubt that the number which in `[mid+1,lo]` is smaller `a[mid]`, **but** the number which in [lo,mid-1] maybe smaller than `a[mid]`, so there is two **smaller** area, but bigger 
+
+if `a[mid] < a[mid+1]`, the **smaller** area is `[lo,mid-1]` and `[mid+1,hi]`, **bigger** area is `[mid+1,hi]`
+
+
+
+time complexity: $O(logn)$
+
+## 1.4.23
+
+well, the solve of problem may seems counterintuitive
+
+ let us reframe the problem.
+
+we have lots of `eggs`,and a building which height is `N`. a `eggs` will break if we drop it from a high enough floor(`>=F`), the egg will break.
+but we don't know `F` definite value, we want to get it in as few trials as possible.
+
+Obviously, if we drop egg layer by layer, we can get it in `F` times trails. this algorithm is brute force.
+
+but we want to get `F` in $o(n)$ times, dose this algorithm exist?
+
+consider binary search, seems it can solve this problem in $O(logn)$ times, but actually, it may worst than brute force in some case.
+
+> eq: F=49, height=100
+>
+> brute force will take 49 times trials
+>
+> but binary search will take 50 times
+
+[鸡蛋掉落 - 鸡蛋掉落 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/super-egg-drop/solution/ji-dan-diao-luo-by-leetcode-solution-2/)
+
+
 
