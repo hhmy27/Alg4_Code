@@ -21,6 +21,7 @@ public class Insertion extends Example {
         Insertion insertion = new Insertion();
         Integer[] a = {3, 2, 1};
         insertion.sort(a);
+        assert insertion.isSorted(a);
         insertion.show(a);
     }
 }

@@ -1,5 +1,7 @@
 package ch02.demo;
 
+import edu.princeton.cs.algs4.StdRandom;
+
 /**
  * @program: Alg4_Code
  * @author: hhmy27
@@ -32,5 +34,13 @@ public abstract class Example {
                 return false;
         }
         return true;
+    }
+
+    public Integer[] generateList(int N) {
+        Integer[] a = new Integer[N];
+        for (int i = 0; i < N; i++) {
+            a[i] = StdRandom.uniform(N);
+        }
+        return a;
     }
 }

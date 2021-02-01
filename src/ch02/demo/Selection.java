@@ -7,7 +7,7 @@ import java.net.ServerSocket;
  * @author: hhmy27
  * @created: 2021/01/30 19:59
  * @description: O(n ^ 2), time of run is independent of input
- * minimal number of element moves
+ * minimal number of times of element moves
  */
 public class Selection extends Example {
 
