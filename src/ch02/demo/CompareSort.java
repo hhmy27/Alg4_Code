@@ -20,7 +20,6 @@ import java.util.Arrays;
  * ref: https://stackoverflow.com/questions/17387888/java-reflection-to-invoke-a-method-that-takes-a-comparable-argument
  */
 public class CompareSort {
-    private String methodName;
     private Object A;
     private Object B;
     // sort name
@@ -30,19 +29,15 @@ public class CompareSort {
     private Method methodA;
     private Method methodB;
 
-    private final int arrayLength = (int) 50e4;
-    private final int numberOfExperiments = 5;
-
     CompareSort(Object A, Object B) throws NoSuchMethodException {
         this.A = A;
         this.B = B;
-        methodName = "sort";
+        String methodName = "sort";
         Class<?> aClass = A.getClass();
         Class<?> bClass = B.getClass();
         nameA = aClass.getSimpleName();
         nameB = bClass.getSimpleName();
 
-        Comparable[] a = {3, 1, 2};
         // 拿到方法
         methodA = aClass.getDeclaredMethod(methodName, Comparable[].class);
         methodB = bClass.getDeclaredMethod(methodName, Comparable[].class);
@@ -50,6 +45,8 @@ public class CompareSort {
     }
 
     private void sortCompare() throws InvocationTargetException, IllegalAccessException {
+        int arrayLength = (int) 50e4;
+        int numberOfExperiments = 5;
         double timeA = timeRandomInput(A, methodA, arrayLength, numberOfExperiments);
         double timeB = timeRandomInput(B, methodB, arrayLength, numberOfExperiments);
 
