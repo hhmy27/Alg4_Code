@@ -21,7 +21,7 @@ import java.util.Iterator;
  * 1.3.30
  *  \
  */
-public class LinkList<Item> implements Iterable<Item> {
+public class LinkList<Item extends Comparable> implements Iterable<Item> {
     private Node first;
     private Node last;
     // N is list node number
@@ -280,12 +280,13 @@ public class LinkList<Item> implements Iterable<Item> {
     }
 
     // answer for ex1.3.27
-    public int max_iterate() {
+    public Item max_iterate() {
         Node t = first;
-        int max = (int) t.item;
-        while (t != null && t != null) {
-            if ((int) t.item > max)
-                max = (int) t.item;
+        Item max = t.item;
+
+        while (t != null) {
+            if (t.item.compareTo(max) > 0)
+                max = t.item;
             t = t.next;
         }
         return max;
