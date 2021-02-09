@@ -69,6 +69,10 @@ public class ex_2_2_17<Item extends Comparable> implements Iterable<Item> {
     public void LinkedListNaturalMergeSort() {
         Node nfirst = mergeSort();
         first = nfirst;
+        last = first;
+        while (last.next != null) {
+            last = last.next;
+        }
     }
 
     public Node mergeSort() {
@@ -147,7 +151,7 @@ public class ex_2_2_17<Item extends Comparable> implements Iterable<Item> {
         list.add(2);
         list.add(7);
         list.add(1);
-        list.add(8);
+        list.add(0);
 
         ex_2_2_17.Node first = list.first;
         while (first != null) {
