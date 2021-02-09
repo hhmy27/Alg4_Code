@@ -96,7 +96,7 @@ public class LinkList<Item extends Comparable> implements Iterable<Item> {
         }
     }
 
-    LinkList() {
+    public LinkList() {
         first = null;
         last = null;
     }

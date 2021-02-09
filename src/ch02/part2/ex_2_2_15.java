@@ -36,5 +36,6 @@ public class ex_2_2_15 {
         Queue<Queue<Integer>> que = func(list);
         System.out.println(que);
 
+
     }
 }

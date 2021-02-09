@@ -43,7 +43,7 @@ public class Merge extends Example {
 
     public static void main(String[] args) {
         Merge merge = new Merge();
-        Integer[] a = merge.generateList(100);
+        Comparable[] a = merge.generateList(100);
 //        Integer[] a = {5, 4, 3, 2, 1};
 //        merge.show(a);
         merge.sort(a);
