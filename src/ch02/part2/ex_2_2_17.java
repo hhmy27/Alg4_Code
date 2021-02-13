@@ -84,10 +84,10 @@ public class ex_2_2_17<Item extends Comparable> implements Iterable<Item> {
             middle = findSortedSubListNode(left);
 
             // already sorted linked list
-            // error! first node will change!
             if (middle == last && left == first) {
                 break;
             }
+
             right = findSortedSubListNode(middle.next);
             left = merge(left, middle, right);
             first = left;
