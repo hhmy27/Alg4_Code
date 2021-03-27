@@ -1,4 +1,4 @@
-package ch04;
+package ch04.part1;
 
 /******************************************************************************
  *  Compilation:  javac BreadthFirstPaths.java
